@@ -1,0 +1,59 @@
+extends layout
+
+block content
+  h1= title
+  div#fk
+    h5 Create
+    form(action='/groups/students/create',method='post',class='create')
+      input(id='idGroup',type="hidden", name="idGroup", value=id, class="form-control")
+      div.form-group
+        label(for='name') name
+        input(id='name',type='text',value='',placeholder='',name='name',class="form-control" required)
+      div.form-group
+        label(for='email') email
+        input(id='email',type='email',value='',placeholder='',name='email',class="form-control" required)
+      div.form-group
+        label(for='phone') phone in phormat 0501234567
+        input(id='phone',type='tel',value='',placeholder='',name='phone',class="form-control" pattern="[0-9]{10}" required)
+      input(type='submit', value='Insert' ,class='btn btn-dark')
+  br
+  table.table
+    thead.thead-light
+      tr
+        th group key
+        th student id
+        th name
+        th email
+        th phone
+        th#thlox options
+    for row in rows
+      tr
+        for column in row
+          td= column.value
+        td#tdlox
+          span
+            form(action='/groups/students/update',method='post')
+              input(id='idGroup',type="hidden", name="idGroup", value=id, class="form-control")
+              input(id='idStudent',type='hidden',value=row[1].value,name='idStudent',class="form-control")
+              input(id='name',type='hidden',value=row[2].value,name='name',class="form-control")
+              input(id='email',type='hidden',value=row[3].value,name='email',class="form-control")
+              input(id='phone',type='hidden',value=row[4].value,name='phone',class="form-control")
+              input(type='submit', value='Update' ,class='btn btn-warning')
+          
+            form(action='/groups/students/delete',method='get')
+              input(id='groupId',type="hidden", name="groupId", value=id, class="form-control")
+              input(id='studentId',type='hidden',value=row[1].value,name='studentId',class="form-control")   
+              input(type='submit', value='Delete' ,class='btn btn-danger')
+  script.
+    var showCreate = function() {
+      var x = document.querySelector("#fk");
+      
+      if (x.style.display == "block") x.style.display = "none";
+      else {
+        x.style.display = "block";
+      } 
+    }
+  button(onclick='showCreate()', class="btn btn-secondary") Show Create
+  form(action='/groups/grops',method='get', id="backLOX")
+    input(id='idGroup',type="hidden", name="idGroup", value=id, class="form-control")
+    input(type='submit', value='Back to Groups' ,class='btn btn-success')

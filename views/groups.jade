@@ -1,0 +1,68 @@
+extends layout
+
+block content
+  h1= title
+  div#fk
+    h5 Create
+    form(action='/groups/create',method='post',class='create')
+      input(id='id',type="hidden", name="id", value=id, class="form-control")
+      div.form-group
+        label(for='name') name
+        input(id='name',type='text',value='',placeholder='',name='name',class="form-control")
+      div.form-group
+        label(for="course") course
+        div
+          select(class="form-group form-control", name="course")
+            optgroup(label="Bachelor")
+              option(value="1") 1
+              option(value="2") 2
+              option(value="3") 3
+              option(value="4") 4
+            optgroup(label="Master")
+              option(value="5") 5
+              option(value="6") 6
+      input(type='submit', value='Insert' ,class='btn btn-dark')
+  br
+  table.table
+    thead.thead-light
+      tr
+        th faculty key
+        th group id
+        th name
+        th course
+        th#thlox options
+    for row in rows
+      tr
+        for column in row
+          td= column.value
+        td#tdlox
+          span
+            form(action='/groups/update',method='post')
+              input(id='id',type="hidden", name="idFak", value=id, class="form-control")
+              input(id='idGroup',type='hidden',value=row[1].value,name='idGroup',class="form-control")
+              input(id='name',type='hidden',value=row[2].value,name='name',class="form-control")
+              input(id='course',type='hidden',value=row[3].value,name='course',class="form-control") 
+              input(type='submit', value='Update' ,class='btn btn-warning')
+          
+            form(action='/groups/delete',method='get')
+              input(id='fakId',type="hidden", name="fakId", value=id, class="form-control")
+              input(id='groupId',type='hidden',value=row[1].value,name='groupId',class="form-control")   
+              input(type='submit', value='Delete' ,class='btn btn-danger')
+            
+            form(action='/groups/students/',method='get')
+              input(id='idGroup',type="hidden", name="idGroup", value=row[1].value, class="form-control")
+              input(type='submit', value='View Students' ,class='btn btn-primary')
+            a(href="http://rozklad-client.s3-website.eu-north-1.amazonaws.com", target="_blank", rel="noopener noreferrer" class="btn btn-info") Shedule for #{row[2].value}
+  script.
+    var showCreate = function() {
+      var x = document.querySelector("#fk");
+      
+      if (x.style.display == "block") x.style.display = "none";
+      else {
+        x.style.display = "block";
+      } 
+    }
+  button(onclick='showCreate()', class="btn btn-secondary") Show Create
+  form(action='/faks',method='get', id="backLOX")
+    input(id='id',type="hidden", name="idFaculty", value=id, class="form-control")
+    input(type='submit', value='Back to Faculties' ,class='btn btn-success')

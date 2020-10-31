@@ -1,0 +1,69 @@
+extends layout
+
+block content
+  
+  h3 Welcome to #{title}
+
+  
+  div#fk
+    h5 Create
+    form(action='/create',method='post',class='create')
+        input(id='id',type="hidden", name="id", value=id, class="form-control")
+        div.form-group
+          label(for='name') name
+          input(id='name',type='text',value='',placeholder='',name='name',class="form-control")
+        div.form-group
+          label(for='shortname') shortname
+          input(id='shortname',type='text',value='',placeholder='',name='shortname',class="form-control") 
+        input(type='submit', value='Insert' ,class='btn btn-dark')
+  div
+    br
+    br
+    span  
+    h3 Faculties :
+  table.table
+    thead.thead-light
+      tr
+        th user key
+        th facultie id
+        th name
+        th shortname
+        th#thlox options
+    for row in rows
+      if row[1] != undefined
+        tr
+          for column in row
+            td= column.value
+          td
+            span
+              form(action='/update',method='post')
+                
+                input(id='id',type="hidden", name="id", value=id, class="form-control")
+                
+                input(id='name',type='hidden',value=row[2].value,name='name',class="form-control")
+                
+                input(id='shortname',type='hidden',value=row[3].value,name='shortname',class="form-control") 
+                input(type='submit', value='Update' ,class='btn btn-warning')
+            
+              form(action='/delete',method='get')
+                
+                input(id='id',type="hidden", name="id", value=id, class="form-control")
+                
+                input(id='fakId',type='hidden',value=row[1].value,name='fakId',class="form-control")
+                
+                input(type='submit', value='Delete' ,class='btn btn-danger')
+              
+              form(action='/groups',method='get')
+                input(id='id',type="hidden", name="id", value=row[1].value, class="form-control")
+                input(type='submit', value='View Groups' ,class='btn btn-primary')
+  script.
+    var hi = function() {
+      var x = document.querySelector("#fk");
+      
+      if (x.style.display == "block") x.style.display = "none";
+      else {
+        x.style.display = "block";
+      }
+      
+    }
+  button(onclick='hi()', class="btn btn-secondary") Show Create

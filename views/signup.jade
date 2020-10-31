@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= signup
+  p Welcome to #{title}
+  div
+    form(action='/saveuser',method='post')
+        div.form-group
+            label(for='name') name
+            input(id='name',type='text',value='',placeholder='',name='name',class="form-control")
+        div#passworddiv.form-group
+            label(for='password') password
+            input(id='password',type='password',value='',placeholder='',name='password',class="form-control")
+        div(data-role='fieldcontain')   
+        input(type='submit',value='Sign Up',class='btn btn-dark' )

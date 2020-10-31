@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  p Welcome to #{title}
+  div#fupdate
+    form(action='/groups/students/save',method='post')
+        input(id='idGroup',type="hidden", name="idGroup", value=idGroup)
+        input(id='idStudent',type="hidden", name="idStudent", value=idStudent)
+        div.form-group
+          label(for='name') name
+          input(id='name',type='text',value='',placeholder='#{name}',name='name',class="form-control")
+        div.form-group
+          label(for='email') email
+          input(id='email',type='email',value='',placeholder='#{email}',name='email',class="form-control") 
+        div.form-group
+          label(for='phone') phone
+          input(id='phone',type='tel',value='',placeholder='#{phone}',name='phone',class="form-control")
+        input(type='submit', value='Save' ,class='btn btn-dark')

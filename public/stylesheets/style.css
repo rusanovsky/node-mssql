@@ -1,0 +1,40 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+form {
+  display: inline;
+  align-items: center;
+}
+td {
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+a {
+  color: #00b7ff;
+}
+option {
+  background-color: gainsboro;
+}
+#fk {
+  display: none;
+  padding: 1mm;
+  margin-top: 1cm;
+  width: fit-content;
+  border: 1px solid black;
+}
+#fupdate {
+  padding: 1mm;
+  margin-top: 1cm;
+  width: fit-content;
+  border: 1px solid black;
+}
+#backLOX {
+  display: block;
+}
+
+.frik {
+  display: block;
+}

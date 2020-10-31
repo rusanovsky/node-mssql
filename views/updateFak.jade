@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+  h1= login
+  p Welcome to #{title}
+  div#fupdate
+    form(action='/save',method='post')
+        div.form-group
+          label(for='id') ur id is #{id}
+          input(id='id',type="hidden", name="id", value=id)
+        div.form-group
+          input(id='pastname',type="hidden", name="pastname", value=name, class="form-control")
+        div.form-group
+          input(id='pastshortname',type="hidden", name="pastshortname", value=shortname, class="form-control")
+        div.form-group
+          label(for='name') name
+          input(id='name',type='text',value='',placeholder='#{name}',name='name',class="form-control")
+        div.form-group
+          label(for='shortname') shortname
+          input(id='shortname',type='text',value='',placeholder='#{shortname}',name='shortname',class="form-control") 
+        input(type='submit', value='Save' ,class='btn btn-dark')
